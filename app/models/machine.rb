@@ -6,4 +6,8 @@ class Machine < ApplicationRecord
   def average_price
     items.average(:price)
   end
+
+  def item_total
+    items.count
+  end
 end

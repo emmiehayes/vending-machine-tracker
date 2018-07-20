@@ -1,2 +1,11 @@
 <h1><%= @item.name %></h1>
 <h2>$<%= @item.price %></h2>
+
+<h2> LOCATIONS </h2>
+<% @machines.each do |machine| %>
+  <% if machine.items.include?(@item) %>
+  <p><%= machine.location %></p>
+  <p><%= machine.average_price %></p>
+  <p><%= machine.item_total %></p>
+  <% end %>
+<% end %>
