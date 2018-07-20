@@ -10,10 +10,26 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170914040805) do
+ActiveRecord::Schema.define(version: 20180720161932) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "items", force: :cascade do |t|
+    t.string "name"
+    t.integer "price"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "machine_items", force: :cascade do |t|
+    t.bigint "machine_id"
+    t.bigint "item_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["item_id"], name: "index_machine_items_on_item_id"
+    t.index ["machine_id"], name: "index_machine_items_on_machine_id"
+  end
 
   create_table "machines", force: :cascade do |t|
     t.string "location"
@@ -25,5 +41,7 @@ ActiveRecord::Schema.define(version: 20170914040805) do
     t.string "name"
   end
 
+  add_foreign_key "machine_items", "items"
+  add_foreign_key "machine_items", "machines"
   add_foreign_key "machines", "owners"
 end
