@@ -4,12 +4,12 @@ feature 'When a user visits an item show page' do
   scenario 'they see the name,price,for the snack' do
     owner = Owner.create(name: "Sam's Snacks")
     dons  = owner.machines.create(location: "Don's Mixed Drinks")
-    sprite = dons.items.create(name: 'Sprite', price: 1.50)
+    sprite = dons.items.create(name: 'Sprite', price: 1)
 
     visit item_path(sprite)
 
     expect(page).to have_content("Sprite")
-    expect(page).to have_content(1.50)
+    expect(page).to have_content('$1')
   end
 end
 
